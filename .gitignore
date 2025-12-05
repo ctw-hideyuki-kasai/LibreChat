@@ -138,3 +138,8 @@ helm/**/.values.yaml
 /.tabnine/
 /.codeium
 *.local.md
+
+# DevContainer data files
+.devcontainer/data-node/
+.devcontainer/meili_data*/
+.devcontainer/pgdata/

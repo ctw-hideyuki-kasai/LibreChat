@@ -1,31 +1,8 @@
-# DevContainer Data Files
-# These files should not be committed to version control
-
-# MongoDB data
+# DevContainer data
 data-node/
-*.wt
-*.lock
-
-# Meilisearch data
 meili_data*/
-meili_data/
-
-# PostgreSQL data (if using local volumes)
 pgdata/
-
-# Environment files (use .env.example instead)
-.env
-.env.local
-.env.*.local
-
-# Logs
 *.log
-logs/
-
-# Temporary files
 *.tmp
-*.temp
-
-
-
+.env
 

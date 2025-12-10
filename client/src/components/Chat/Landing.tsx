@@ -2,6 +2,7 @@ import { useMemo, useCallback, useState, useEffect, useRef } from 'react';
 import { easings } from '@react-spring/web';
 import { EModelEndpoint } from 'librechat-data-provider';
 import { BirthdayIcon, TooltipAnchor, SplitText } from '@librechat/client';
+import { Feather } from 'lucide-react';
 import { useChatContext, useAgentsMapContext, useAssistantsMapContext } from '~/Providers';
 import { useGetEndpointsQuery, useGetStartupConfig } from '~/data-provider';
 import ConvoIcon from '~/components/Endpoints/ConvoIcon';
@@ -75,7 +76,7 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
       const customWelcome = startupConfig.interface.customWelcome;
       // Replace {{user.name}} with actual user name if available
       if (user?.name && customWelcome.includes('{{user.name}}')) {
-        return customWelcome.replace(/{{user.name}}/g, user.name);
+        return customWelcome.replace(/{{user.name}}/g, user.name + ' CTW');
       }
       return customWelcome;
     }
@@ -141,27 +142,23 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
   const greetingText =
     typeof startupConfig?.interface?.customWelcome === 'string'
       ? getGreeting()
-      : getGreeting() + (user?.name ? ', ' + user.name : '');
+      : getGreeting() + (user?.name ? ', ' + user.name + ' CTW' : '');
 
   return (
     <div
       className={`flex h-full transform-gpu flex-col items-center justify-center pb-16 transition-all duration-200 ${centerFormOnLanding ? 'max-h-full sm:max-h-0' : 'max-h-full'} ${getDynamicMargin}`}
     >
+      <div className="ctw-logo-bg" data-logo-url="assets/claytechworks_logo_typeA_gray.svg">
+        <img src="assets/claytechworks_logo_typeA_gray.svg" alt="Claytech Works Logo" />
+      </div>
       <div ref={contentRef} className="flex flex-col items-center gap-0 p-2">
         <div
           className={`flex ${textHasMultipleLines ? 'flex-col' : 'flex-col md:flex-row'} items-center justify-center gap-2`}
         >
           <div className={`relative size-10 justify-center ${textHasMultipleLines ? 'mb-2' : ''}`}>
-            <ConvoIcon
-              agentsMap={agentsMap}
-              assistantMap={assistantMap}
-              conversation={conversation}
-              endpointsConfig={endpointsConfig}
-              containerClassName={containerClassName}
-              context="landing"
-              className="h-2/3 w-2/3 text-black dark:text-white"
-              size={41}
-            />
+            <div className={containerClassName}>
+              <Feather className="h-2/3 w-2/3 text-black dark:text-white" />
+            </div>
             {startupConfig?.showBirthdayIcon && (
               <TooltipAnchor
                 className="absolute bottom-[27px] right-2"

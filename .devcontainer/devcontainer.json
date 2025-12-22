@@ -2,17 +2,38 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspaces",
+  "forwardPorts": [3080, 27017, 7700],
+  "portsAttributes": {
+    "3080": {
+      "label": "LibreChat",
+      "onAutoForward": "notify"
+    },
+    "27017": {
+      "label": "MongoDB",
+      "onAutoForward": "silent"
+    },
+    "7700": {
+      "label": "Meilisearch",
+      "onAutoForward": "silent"
+    }
+  },
   "customizations": {
     "vscode": {
-      "extensions": [],
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next"
+      ],
       "settings": {
         "terminal.integrated.profiles.linux": {
           "bash": null
-        }
+        },
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
       }
     }
   },
-  "postCreateCommand": "",
+  "postCreateCommand": "npm ci && npm run build:data-provider && npm run build:data-schemas && npm run build:api && npm run build:client-package",
   "features": { "ghcr.io/devcontainers/features/git:1": {} },
   "remoteUser": "vscode"
 }

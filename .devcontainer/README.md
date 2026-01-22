@@ -20,3 +20,9 @@
 - `librechat.yaml` が無いと警告が出ます。必要に応じてルートに配置してください。
 - RAG API のDB接続エラーが出る場合は、`.env` の Postgres 資格情報と `docker-compose.yml` の `vectordb` 設定を揃えてください。
 
+
+
+
+
+
+

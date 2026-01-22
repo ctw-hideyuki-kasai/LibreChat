@@ -17,5 +17,13 @@ These guidelines are established to prevent unnecessary code modifications and e
 *   **Action**: Check `client/src/locales`, `client/src/hooks`, and logical wrappers (like `StartupLayout`) before overriding content.
 *   **Why**: To maintain maintainability and consistency (e.g., Dark Mode support, Multi-language support).
 
+## 4. Upstream-Friendly Customization (Docker-first)
+* **Principle**: アプリ本体は極力改変せず、公式Dockerイメージをそのまま利用し、upstream更新を取り込みやすくする。
+* **Action**:
+  * ロゴ/背景/CSS/翻訳/設定(yaml/env)は **コンテナ起動時のvolumeマウント** で注入。
+  * Reactコンポーネント等、どうしてもソース改変が必要な箇所は **最小限のパッチ運用** にとどめる。
+* **Why**: ソース差分を最小化し、upstreamとのマージコストを抑える。
+
 ## Revision History
 - **2025-12-09**: Added initial rules following "Login Page Customization" task where redundant text/style changes were initially proposed.
+- **2025-12-23**: Added upstream-friendly Docker/volume/patch運用方針。
